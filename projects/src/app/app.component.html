@@ -1,0 +1,81 @@
+<body>
+  <nav>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+  </nav>
+
+  <div class="container">
+    <header class="header">
+      <h1>User Registration Form</h1>
+      <p>{{ currentDate | date : "fullDate" }}</p>
+    </header>
+
+    <section class="user-input-section">
+      <label for="name">Enter your name</label>
+      <input
+        type="text"
+        [(ngModel)]="name"
+        placeholder="Enter your name"
+        aria-label="Enter your name"
+      />
+      <p>
+        Your name is: <span>{{ name }}</span>
+      </p>
+    </section>
+
+    <section class="button-section">
+      <div class="button-group">
+        <button class="login-btn" (click)="logMessage()">Login</button><br />
+        <button class="toggle-btn" (click)="isVisible = !isVisible">
+          Toggle Show
+        </button>
+        <button class="togglelogin-btn" (click)="toggleLogin()">
+          Toggle Login
+        </button>
+      </div>
+    </section>
+
+    <section class="login-status-section">
+      <p [ngClass]="{ 'logged-in': isLoggedIn, 'logged-out': !isLoggedIn }">
+        {{ isLoggedIn ? "Welcome back!" : "Please log in" }}
+      </p>
+    </section>
+
+    <section class="add-user-section">
+      <input
+        type="text"
+        [(ngModel)]="newUser"
+        placeholder="Enter user name"
+        aria-label="Enter user name"
+      />
+      <button (click)="addUser()">Add User</button>
+    </section>
+
+    <section class="user-list-section">
+      <h2>Users List</h2>
+      <ul class="center-ul">
+        <li *ngFor="let user of users">{{ user }}</li>
+      </ul>
+    </section>
+
+    <section class="content-box-section">
+      <button class="content-box-btn" *ngIf="isVisible">
+        This is conditionally shown
+      </button>
+    </section>
+
+    <section class="submit-btn-section">
+      <button class="submit-btn">Submit</button>
+    </section>
+
+    <section class="product-list-section">
+      <h1>{{ title }}</h1>
+      <ul class="center-ul">
+        <li *ngFor="let product of products">
+          {{ product.name }} - ${{ product.price }}
+        </li>
+      </ul>
+    </section>
+  </div>
+  <router-outlet></router-outlet>
+</body>
